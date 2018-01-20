@@ -2,6 +2,7 @@ package basket;
 
 import java.util.ArrayList;
 import discount.IDiscount;
+import discount.LoyaltyDiscount;
 
 public class Basket {
     private ArrayList<Item> items;
@@ -34,8 +35,21 @@ public class Basket {
         this.total = 0;
     }
 
+    public void addDiscount(IDiscount discount){
+        this.discounts.add(discount);
+    }
+
     public double getTotal() {
         return total;
     }
 
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public void applyDiscount() {
+        for (IDiscount discount : discounts) {
+            setTotal(discount.applyDiscount(items, total));
+        }
+    }
 }

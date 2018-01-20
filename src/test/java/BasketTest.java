@@ -1,5 +1,6 @@
 import basket.Basket;
 import basket.Item;
+import discount.LoyaltyDiscount;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,11 +11,13 @@ public class BasketTest {
     Basket basket;
     Item item1;
     Item item2;
+    LoyaltyDiscount loyaltyDiscount;
 
 
     @Before
     public void before(){
         basket = new Basket();
+        loyaltyDiscount = new LoyaltyDiscount();
         item1 = new Item("Apple", 1.00);
         item2 = new Item("Orange", 1.00);
         basket.addItem(item1);
@@ -51,5 +54,12 @@ public class BasketTest {
     @Test
     public void canGetTotal(){
         assertEquals(2.00, basket.getTotal(), 0.1);
+    }
+
+    @Test
+    public void canApplyLoyaltyDiscount(){
+        basket.addDiscount(loyaltyDiscount);
+        basket.applyDiscount();
+        assertEquals(1.96, basket.getTotal(), 0.01);
     }
 }

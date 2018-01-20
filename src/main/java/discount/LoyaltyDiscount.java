@@ -3,7 +3,6 @@ import basket.Item;
 import java.util.ArrayList;
 
 
-
 public class LoyaltyDiscount implements IDiscount {
 
     @Override
